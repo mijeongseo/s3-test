@@ -1,5 +1,5 @@
 /front/build/
 node_modules
-s3-test-mimi.pem
+nst-test-mimi.pem
 .env
 .next
