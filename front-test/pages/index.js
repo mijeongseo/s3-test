@@ -1,48 +1,43 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from 'react';
 
-import AppLayout from "../components/AppLayout";
-import PostForm from "../components/PostForm";
-import ImagePopup from "../components/ImagePopup";
+import AppLayout from '../components/AppLayout';
+import PostForm from '../components/PostForm';
+import ImagePopup from '../components/ImagePopup';
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
-import { backUrl } from "../config/config";
+import { backUrl } from '../config/config';
 
 export default function Home() {
-  const state = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  const { mainPosts } = state;
-  const [imgbool, setImgbool] = useState(false);
-  const [imgsrc, setImgsrc] = useState("");
+    const state = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const { mainPosts } = state;
+    const [imgbool, setImgbool] = useState(false);
+    const [imgsrc, setImgsrc] = useState('');
 
-  useEffect(() => {
-    dispatch({
-      type: "LOAD_POSTS_REQUEST",
-    });
-  }, []);
+    useEffect(() => {
+        dispatch({
+            type: 'LOAD_POSTS_REQUEST',
+        });
+    }, []);
 
-  const popOpen = useCallback((e) => {
-    setImgbool((prev) => !prev);
-    setImgsrc(e.target.src);
-  }, []);
+    const popOpen = useCallback((e) => {
+        setImgbool((prev) => !prev);
+        setImgsrc(e.target.src);
+    }, []);
 
-  return (
-    <AppLayout>
-      <PostForm />
+    return (
+        <AppLayout>
+            <PostForm />
 
-      {mainPosts?.length !== 0 &&
-        mainPosts.map((post) => (
-          <div style={{ cursor: "pointer" }} key={post.id}>
-            <img
-              style={{ display: "block", width: "100%", marginTop: 20 }}
-              src={`${backUrl}/${post.src}`}
-              onClick={popOpen}
-              alt=""
-            />
-          </div>
-        ))}
+            {mainPosts?.length !== 0 &&
+                mainPosts.map((post) => (
+                    <div style={{ cursor: 'pointer' }} key={post.id}>
+                        <img style={{ display: 'block', width: '100%', marginTop: 20 }} src={`${post.src}`} onClick={popOpen} alt="" />
+                    </div>
+                ))}
 
-      {imgbool && <ImagePopup src={imgsrc} onClick={popOpen} />}
-    </AppLayout>
-  );
+            {imgbool && <ImagePopup src={imgsrc} onClick={popOpen} />}
+        </AppLayout>
+    );
 }
