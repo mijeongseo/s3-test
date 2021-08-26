@@ -3,7 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const multer = require('multer');
+const multerS3 = require('multer-s3');
 const AWS = require('aws-sdk');
 
 const { Image, Post } = require('../models');
